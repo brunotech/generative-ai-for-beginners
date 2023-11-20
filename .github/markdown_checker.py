@@ -26,20 +26,24 @@ def main() -> None:
             if in_arg.dir == lesson_folder_name:
                 file_path = os.path.join(lesson_folder_name, lesson_file_name)
             if "check_broken_paths" in in_arg.func:
-                formatted_output = check_broken_links(file_path, "path" , "broken")
-                if formatted_output:
+                if formatted_output := check_broken_links(
+                    file_path, "path", "broken"
+                ):
                     print(formatted_output)
             if "check_paths_tracking" in in_arg.func:
-                formatted_output = check_broken_links(file_path, "path" , "tracking")
-                if formatted_output:
+                if formatted_output := check_broken_links(
+                    file_path, "path", "tracking"
+                ):
                     print(formatted_output)
             if "check_urls_tracking" in in_arg.func:
-                formatted_output = check_broken_links(file_path, "url" , "tracking")
-                if formatted_output:
+                if formatted_output := check_broken_links(
+                    file_path, "url", "tracking"
+                ):
                     print(formatted_output)
             if "check_urls_locale" in in_arg.func:
-                formatted_output = check_broken_links(file_path, "url" , "locale")
-                if formatted_output:
+                if formatted_output := check_broken_links(
+                    file_path, "url", "locale"
+                ):
                     print(formatted_output)
 
 # Helper Functions
@@ -51,9 +55,7 @@ def get_lessons_paths(root_path: str) -> dict:
     root_path -- directory to go through looking for md files
     Return: formatted dictionary with directories as key and an array of files as values
     """
-    lessons = {}
-    # add root path to the dictionary
-    lessons[root_path] = []
+    lessons = {root_path: []}
     pass_list = ['CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'SECURITY.md']
     # get lessons folders
     for item in os.listdir(root_path):
@@ -61,7 +63,7 @@ def get_lessons_paths(root_path: str) -> dict:
             lessons[item] = []
 
     # get lesson exercises (md, ipynb files)
-    for lesson, _ in lessons.items():
+    for lesson in lessons:
         if lesson != root_path:
             for item in os.listdir(os.path.join(root_path, lesson)):
                 # check for translations directories
@@ -136,9 +138,11 @@ def get_links_from_file(file_path: str) -> list:
         data = file.read()
         link_pattern = re.compile(r'\]\((.*?)\)| \)')
         matches = re.finditer(link_pattern, data)
-        for matched_group in matches:
-            if matched_group.group(1):
-                all_links.append(matched_group.group(1))
+        all_links.extend(
+            matched_group.group(1)
+            for matched_group in matches
+            if matched_group.group(1)
+        )
     return all_links
 
 def get_urls_from_links(all_links: list) -> list:
@@ -162,8 +166,7 @@ def get_paths_from_links(all_links: list) -> list:
 
     for link in all_links:
         link = link.split(" ")[0]
-        matches = re.findall(path_pattern, link)
-        if matches:
+        if matches := re.findall(path_pattern, link):
             paths.append(link)
     return paths
 
@@ -185,8 +188,7 @@ def check_url_locale(urls : list) -> list:
     country_locale = []
     for url in urls:
         locale_pattern = re.compile(r'\/[a-z]{2}-[a-z]{2}\/')
-        matches = re.findall(locale_pattern, url)
-        if matches:
+        if matches := re.findall(locale_pattern, url):
             country_locale.append(url)
     return country_locale
 
@@ -246,8 +248,7 @@ def get_urls_from_file(file_path: str) -> list:
         data = file.read()
         url_pattern = re.compile(r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)')
         matches = re.finditer(url_pattern, data)
-        for matched_group in matches:
-            urls.append(matched_group.group())
+        urls.extend(matched_group.group() for matched_group in matches)
     return urls
 
 def get_paths_from_file(file_path: str) -> list:
@@ -257,6 +258,5 @@ def get_paths_from_file(file_path: str) -> list:
         data = file.read()
         path_pattern = re.compile(r'(\.{1,2}\/)+([A-Za-z0-9-]+\/)*([A-Za-z0-9]+\.[A-Za-z]+)')
         matches = re.finditer(path_pattern, data)
-        for matched_group in matches:
-            paths.append(matched_group.group())
+        paths.extend(matched_group.group() for matched_group in matches)
     return paths

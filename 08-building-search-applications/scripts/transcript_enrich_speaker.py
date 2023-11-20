@@ -225,7 +225,7 @@ with Progress() as progress:
     task1 = progress.add_task("[blue]Enriching Speaker Data...", total=q.qsize())
     # create multiple threads to process the queue
     threads = []
-    for i in range(PROCESSING_THREADS):
+    for _ in range(PROCESSING_THREADS):
         t = threading.Thread(target=process_queue, args=(progress, task1))
         t.start()
         threads.append(t)

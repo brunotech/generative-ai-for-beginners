@@ -83,8 +83,7 @@ def normalize_text(s, sep_token=" \n "):
 def get_text_embedding(text: str):
     """get the embedding for a text"""
 
-    embedding = get_embedding(text, engine="text-embedding-ada-002", timeout=60)
-    return embedding
+    return get_embedding(text, engine="text-embedding-ada-002", timeout=60)
 
 
 def process_queue(progress, task):
@@ -129,7 +128,7 @@ with Progress() as progress:
     task1 = progress.add_task("[green]Enriching Embeddings...", total=total_segments)
     # create multiple threads to process the queue
     threads = []
-    for i in range(PROCESSING_THREADS):
+    for _ in range(PROCESSING_THREADS):
         t = threading.Thread(target=process_queue, args=(progress, task1))
         t.start()
         threads.append(t)
@@ -143,11 +142,10 @@ with Progress() as progress:
 def convert_time_to_seconds(value):
     """convert time to seconds"""
     time_value = value.split(":")
-    if len(time_value) == 3:
-        h, m, s = time_value
-        return int(h) * 3600 + int(m) * 60 + int(s)
-    else:
+    if len(time_value) != 3:
         return 0
+    h, m, s = time_value
+    return int(h) * 3600 + int(m) * 60 + int(s)
 
 
 # sort the output segments by videoId and start

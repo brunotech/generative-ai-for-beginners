@@ -176,7 +176,7 @@ with Progress() as progress:
 
     # create multiple threads to process the queue
     threads = []
-    for i in range(PROCESSOR_THREADS):
+    for _ in range(PROCESSOR_THREADS):
         t = threading.Thread(target=process_queue, args=(progress, task1))
         t.start()
         threads.append(t)
@@ -190,11 +190,10 @@ with Progress() as progress:
 def convert_time_to_seconds(value):
     """convert time to seconds"""
     time_value = value.split(":")
-    if len(time_value) == 3:
-        h, m, s = time_value
-        return int(h) * 3600 + int(m) * 60 + int(s)
-    else:
+    if len(time_value) != 3:
         return 0
+    h, m, s = time_value
+    return int(h) * 3600 + int(m) * 60 + int(s)
 
 
 # sort the output segments by videoId and start
