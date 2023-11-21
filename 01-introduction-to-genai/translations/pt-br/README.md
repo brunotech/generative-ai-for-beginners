@@ -1,6 +1,6 @@
 # Introdução à IA Generativa e Modelos de Linguagem de Grande Porte
 
-[![Introdução à IA Generativa e Modelos de Linguagem de Grande Porte](./images/01-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://youtu.be/YtUwjD-FFBY)
+[![Introdução à IA Generativa e Modelos de Linguagem de Grande Porte](../../images/01-lesson-banner.png?WT.mc_id=academic-105485-koreyst)](https://youtu.be/YtUwjD-FFBY)
 
 *(Clique na imagem acima para assistir ao vídeo desta aula)
 
@@ -35,7 +35,7 @@ A equipe da nossa startup está ciente de que não será capaz de alcançar esse
 
 A IA generativa espera revolucionar a forma como aprendemos e ensinamos hoje, com alunos tendo à disposição professores virtuais 24 horas por dia, fornecendo vastas quantidades de informações e exemplos, e professores sendo capazes de aproveitar ferramentas inovadoras para avaliar seus alunos e fornecer feedback.
 
-![Five young students looking at a monitor - image by DALLE2](./images/students-by-DALLE2.png?WT.mc_id=academic-105485-koreyst)
+![Five young students looking at a monitor - image by DALLE2](../../images/students-by-DALLE2.png?WT.mc_id=academic-105485-koreyst)
 
 Para começar, vamos definir alguns conceitos e terminologia básicos que usaremos ao longo do currículo.
 
@@ -62,7 +62,7 @@ Esta é a tecnologia que impulsionou os assistentes virtuais nascidos na primeir
 
 Então, é assim que chegamos à IA Generativa hoje, que pode ser vista como um subconjunto de aprendizado profundo.
 
-![IA, ML, DL e IA Generativa](./images/AI-diagram.png?WT.mc_id=academic-105485-koreyst)
+![IA, ML, DL e IA Generativa](../../images/AI-diagram.png?WT.mc_id=academic-105485-koreyst)
 
 Após décadas de pesquisa no campo da IA, uma nova arquitetura de modelo - chamada *Transformer* - superou os limites das RNNs, sendo capaz de obter sequências de texto muito mais longas como entrada. Os Transformers são baseados no mecanismo de atenção, permitindo que o modelo atribua diferentes pesos às entradas que recebe, 'prestando mais atenção' onde as informações mais relevantes estão concentradas, independentemente de sua ordem na sequência de texto.
 
@@ -75,7 +75,7 @@ No próximo capítulo, vamos explorar diferentes tipos de modelos de IA generati
 * **Tokenizer, texto para números**: Os Modelos de Linguagem Grandes recebem um texto como entrada e geram um texto como saída. No entanto, sendo modelos estatísticos, eles funcionam muito melhor com números do que com sequências de texto. É por isso que cada entrada no modelo é processada por um tokenizador, antes de ser usada pelo modelo principal. Um token é um trecho de texto - consistindo em um número variável de caracteres, então a principal tarefa do tokenizador é dividir a entrada em uma matriz de tokens. Em seguida, cada token é mapeado com um índice de token, que é a codificação inteira do trecho de texto original.
 
 
-!![Exemplo de Tokenização](./images/tokenizer-example.png?WT.mc_id=academic-105485-koreyst)
+!![Exemplo de Tokenização](../../images/tokenizer-example.png?WT.mc_id=academic-105485-koreyst)
 
 * **Previsão de tokens de saída**: Dados n tokens como entrada (com n máximo variando de um modelo para outro), o modelo é capaz de prever um token como saída. Esse token é então incorporado à entrada da próxima iteração, em um padrão de janela expansiva, permitindo uma melhor experiência do usuário ao obter uma (ou várias) sentenças como resposta. Isso explica por que, se você já brincou com o ChatGPT, pode ter percebido que às vezes parece parar no meio de uma frase.
 
@@ -93,31 +93,31 @@ A entrada de um modelo de linguagem grande é conhecida como prompt, enquanto a 
 
     1. Resumo de um artigo, livro, avaliações de produtos e mais, juntamente com a extração de insights de dados não estruturados.
 
-    ![Exemplo de resumo](./images/summarization-example.png?WT.mc_id=academic-105485-koreyst)
+    ![Exemplo de resumo](../../images/summarization-example.png?WT.mc_id=academic-105485-koreyst)
 
     <br>
     
     2. Ideação criativa e design de um artigo, uma redação, uma tarefa ou mais.
     
-    ![Exemplo de escrita criativa](./images/creative-writing-example.png?WT.mc_id=academic-105485-koreyst)
+    ![Exemplo de escrita criativa](../../images/creative-writing-example.png?WT.mc_id=academic-105485-koreyst)
 
     <br>
     
 * Uma **pergunta**, feita na forma de uma conversa com um agente.
 
-![Exemplo de conversa](./images/conversation-example.png?WT.mc_id=academic-105485-koreyst)
+![Exemplo de conversa](../../images/conversation-example.png?WT.mc_id=academic-105485-koreyst)
 
 <br>
 
 * Um trecho de **texto para completar**, que implicitamente é um pedido de assistência na escrita.
 
-![Exemplo de conclusão de texto](./images/text-completion-example.png?WT.mc_id=academic-105485-koreyst)
+![Exemplo de conclusão de texto](../../images/text-completion-example.png?WT.mc_id=academic-105485-koreyst)
 
 <br>
 
 * Um trecho de **código** juntamente com a solicitação de explicá-lo e documentá-lo, ou um comentário pedindo para gerar um trecho de código que execute uma tarefa específica.
 
-![Exemplo de codificação](./images/coding-example.png?WT.mc_id=academic-105485-koreyst)
+![Exemplo de codificação](../../images/coding-example.png?WT.mc_id=academic-105485-koreyst)
 
 <br>
 
