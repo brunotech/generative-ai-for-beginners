@@ -31,7 +31,7 @@ total_segments = len(segments)
 def remove_text(video_segments):
     """This function removes the text from each dictionary in the list."""
     return [
-        {k: v for k, v in seg.items() if k != "text" and k != "description"}
+        {k: v for k, v in seg.items() if k not in ["text", "description"]}
         for seg in video_segments
     ]
 

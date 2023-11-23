@@ -70,14 +70,14 @@ def gen_metadata(playlist_item):
     """Generate metadata for a video"""
 
     video_id = playlist_item["snippet"]["resourceId"]["videoId"]
-    filename = os.path.join(TRANSCRIPT_FOLDER, video_id + ".json")
+    filename = os.path.join(TRANSCRIPT_FOLDER, f"{video_id}.json")
 
-    metadata = {}
-    metadata["speaker"] = ""
-    metadata["title"] = playlist_item["snippet"]["title"]
-    metadata["videoId"] = playlist_item["snippet"]["resourceId"]["videoId"]
-    metadata["description"] = playlist_item["snippet"]["description"]
-
+    metadata = {
+        "speaker": "",
+        "title": playlist_item["snippet"]["title"],
+        "videoId": playlist_item["snippet"]["resourceId"]["videoId"],
+        "description": playlist_item["snippet"]["description"],
+    }
     # save the metadata as a .json file
     json.dump(metadata, open(filename, "w", encoding="utf-8"))
 
@@ -86,7 +86,7 @@ def get_transcript(playlist_item, counter_id):
     """Get the transcript for a video"""
 
     video_id = playlist_item["snippet"]["resourceId"]["videoId"]
-    filename = os.path.join(TRANSCRIPT_FOLDER, video_id + ".json.vtt")
+    filename = os.path.join(TRANSCRIPT_FOLDER, f"{video_id}.json.vtt")
 
     # if video transcript already exists, skip it
     if os.path.exists(filename):
@@ -146,9 +146,7 @@ while request:
     for item in response["items"]:
         q.put(item)
 
-    # Get the next page token from the response and create a new request object
-    next_page_token = response.get("nextPageToken")
-    if next_page_token:
+    if next_page_token := response.get("nextPageToken"):
         request = youtube.playlistItems().list(
             part="snippet",
             playlistId=PLAYLIST_ID,
@@ -164,7 +162,7 @@ start_time = time.time()
 
 # create multiple threads to process the queue
 threads = []
-for i in range(PROCESSING_THREADS):
+for _ in range(PROCESSING_THREADS):
     t = threading.Thread(
         target=process_queue,
         args=(),

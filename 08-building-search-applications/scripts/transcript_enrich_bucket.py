@@ -89,7 +89,7 @@ def append_text_to_previous_segment(text):
         words = text.split(" ")
         word_count = len(words)
         if word_count > 0:
-            append_text = " ".join(words[0 : int(word_count * PERCENTAGE_OVERLAP)])
+            append_text = " ".join(words[:int(word_count * PERCENTAGE_OVERLAP)])
             segments[-1]["text"] += append_text
 
 
@@ -152,7 +152,7 @@ def parse_json_vtt_transcript(vtt, metadata):
 
             if current_seconds < seg_finish_seconds and total_tokens < MAX_TOKENS:
                 # add the text to the transcript
-                text += current_text + " "
+                text += f"{current_text} "
                 current_token_length = total_tokens
             else:
                 if not first_segment:
@@ -162,7 +162,7 @@ def parse_json_vtt_transcript(vtt, metadata):
                 first_segment = False
                 add_new_segment(metadata, text, seg_begin_seconds)
 
-                text = current_text + " "
+                text = f"{current_text} "
 
                 # reset the segment_begin_time
                 seg_begin_seconds = None
